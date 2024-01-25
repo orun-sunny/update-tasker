@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import logo from "./assets/assets/logo.svg";
 import moon from "./assets/assets/icons/moon.svg";
 import ring from "./assets/assets/ring.svg";
 import cart from "./assets/assets/shopping-cart.svg";
 import CartDetails from "./cine/CartDetails";
+import { MovieContext } from "./context";
 
 export default function Header() {
   const [showCart, setShowCart] = useState(false);
+  const { cartData } = useContext(MovieContext);
+  //   console.log(cartData);
 
   function handleCartShow() {
     setShowCart(true);
@@ -43,7 +46,12 @@ export default function Header() {
               href="#"
               onClick={handleCartShow}
             >
-              <img src={cart} width="24" height="24" alt="" />
+              <img src={cart} width="24" height="24" alt="cart" />
+              {cartData.length > 0 && (
+                <span className="rounded-full absolute top-[-12px] left-[28px] bg-[#12CF6F] text-white text-center p-[2px] w-[30px] h-[30px]">
+                  {cartData.length}
+                </span>
+              )}
             </a>
           </li>
         </ul>
